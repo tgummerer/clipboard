@@ -19,20 +19,20 @@ const (
 )
 
 var (
-	user32                     = syscall.MustLoadDLL("user32")
-	isClipboardFormatAvailable = user32.MustFindProc("IsClipboardFormatAvailable")
-	openClipboard              = user32.MustFindProc("OpenClipboard")
-	closeClipboard             = user32.MustFindProc("CloseClipboard")
-	emptyClipboard             = user32.MustFindProc("EmptyClipboard")
-	getClipboardData           = user32.MustFindProc("GetClipboardData")
-	setClipboardData           = user32.MustFindProc("SetClipboardData")
+	user32                     *syscall.DLL  // = syscall.MustFindDLL("user32")
+	isClipboardFormatAvailable *syscall.Proc // = user32.MustFindProc("IsClipboardFormatAvailable")
+	openClipboard              *syscall.Proc // = user32.MustFindProc("OpenClipboard")
+	closeClipboard             *syscall.Proc // = user32.MustFindProc("CloseClipboard")
+	emptyClipboard             *syscall.Proc // = user32.MustFindProc("EmptyClipboard")
+	getClipboardData           *syscall.Proc // = user32.MustFindProc("GetClipboardData")
+	setClipboardData           *syscall.Proc // = user32.MustFindProc("SetClipboardData")
 
-	kernel32     = syscall.NewLazyDLL("kernel32")
-	globalAlloc  = kernel32.NewProc("GlobalAlloc")
-	globalFree   = kernel32.NewProc("GlobalFree")
-	globalLock   = kernel32.NewProc("GlobalLock")
-	globalUnlock = kernel32.NewProc("GlobalUnlock")
-	lstrcpy      = kernel32.NewProc("lstrcpyW")
+	kernel32     *syscall.DLL  // = syscall.NewLazyDLL("kernel32")
+	globalAlloc  *syscall.Proc // = kernel32.NewProc("GlobalAlloc")
+	globalFree   *syscall.Proc // = kernel32.NewProc("GlobalFree")
+	globalLock   *syscall.Proc // = kernel32.NewProc("GlobalLock")
+	globalUnlock *syscall.Proc // = kernel32.NewProc("GlobalUnlock")
+	lstrcpy      *syscall.Proc // = kernel32.NewProc("lstrcpyW")
 )
 
 // waitOpenClipboard opens the clipboard, waiting for up to a second to do so.
